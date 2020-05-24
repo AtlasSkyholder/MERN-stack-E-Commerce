@@ -1,6 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 function UploadProductPage() {
+
+  const [TitleValue, setTitleValue] = useState("");
+
+  const [DescriptionValue, setDescriptionValue] = useState("");
+
+  const onTitleChange = (event) => {
+    setTitleValue(event.currentTarget.value);
+  }
+
+  const onDescriptionChange = (event) => {
+    setDescriptionValue(event.currentTarget.value);
+  }
+
   return (
     <div style={{ maxWidth:'700px', margin:'2rem auto' }}>
       <div style={{ textAlign:'center', marginBottom:'2rem'}}>
@@ -15,15 +28,15 @@ function UploadProductPage() {
         <br />
         <label>Title</label>
         <input 
-          onChange
-          value
+          onChange={onTitleChange}
+          value={TitleValue}
         />
         <br />
         <br />
         <label>Description</label>
         <textarea 
-          onChange
-          value
+          onChange={onDescriptionChange}
+          value={DescriptionValue}
         />
         <br />
         <br />
