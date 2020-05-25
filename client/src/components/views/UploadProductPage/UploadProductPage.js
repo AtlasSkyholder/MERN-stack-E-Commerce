@@ -1,4 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+
+const Continents = [
+  {key: 1, value: "Africa"},
+  {key: 2, value: "Europe"},
+  {key: 3, value: "Asia"},
+  {key: 4, value: "North America"},
+  {key: 5, value: "South America"},
+  {key: 6, value: "Australia"},
+  {key: 7, value: "Antartica"}
+]
 
 function UploadProductPage() {
 
@@ -6,7 +16,7 @@ function UploadProductPage() {
 
   const [DescriptionValue, setDescriptionValue] = useState("");
 
-  const [PriceValue, setPriceValue] = useState("");
+  const [PriceValue, setPriceValue] = useState(0);
 
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
@@ -53,9 +63,11 @@ function UploadProductPage() {
           type="number"
         />
         <select>
-          <option key value>
 
-          </option>
+          {Continents.map(item => {
+            <option key={item.key} value={item.key}>{item.value} </option>
+          })}
+
         </select>
         <br />
         <br />
