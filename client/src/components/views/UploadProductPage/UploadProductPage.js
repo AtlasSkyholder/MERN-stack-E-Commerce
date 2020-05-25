@@ -6,12 +6,18 @@ function UploadProductPage() {
 
   const [DescriptionValue, setDescriptionValue] = useState("");
 
+  const [PriceValue, setPriceValue] = useState("");
+
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
   }
 
   const onDescriptionChange = (event) => {
     setDescriptionValue(event.currentTarget.value);
+  }
+
+  const onPriceChange = (event) => {
+    setPriceValue(event.currentTarget.value);
   }
 
   return (
@@ -42,8 +48,8 @@ function UploadProductPage() {
         <br />
         <label>Price($)</label>
         <input
-          onChange
-          value
+          onChange={onPriceChange}
+          value={PriceValue}
           type="number"
         />
         <select>
