@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import { Typography. Button, Form, message, Input, Icon } from 'antd';
+
+const { Title } = Typography;
+const { TextArea } = Input;
 
 const Continents = [
   {key: 1, value: "Africa"},
@@ -13,10 +17,9 @@ const Continents = [
 function UploadProductPage() {
 
   const [TitleValue, setTitleValue] = useState("");
-
   const [DescriptionValue, setDescriptionValue] = useState("");
-
   const [PriceValue, setPriceValue] = useState(0);
+  const [ContinentValue, setContinentValue] = useState(1);
 
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
@@ -30,55 +33,57 @@ function UploadProductPage() {
     setPriceValue(event.currentTarget.value);
   }
 
+  const onContinentsSelectChange = (event) => {
+    setContinentValue(event.currentTarget.value);
+  }
+
   return (
     <div style={{ maxWidth:'700px', margin:'2rem auto' }}>
       <div style={{ textAlign:'center', marginBottom:'2rem'}}>
-        <h2> Upload Travel Product</h2>
+        <Title level={2}> Upload Travel Product</Title>
       </div>
       
-      <form onSubmit >
+      <Form onSubmit >
 
         {/* DropZone */}
 
         <br />
         <br />
         <label>Title</label>
-        <input 
+        <Input 
           onChange={onTitleChange}
           value={TitleValue}
         />
         <br />
         <br />
         <label>Description</label>
-        <textarea 
+        <TextArea 
           onChange={onDescriptionChange}
           value={DescriptionValue}
         />
         <br />
         <br />
         <label>Price($)</label>
-        <input
+        <Input
           onChange={onPriceChange}
           value={PriceValue}
           type="number"
         />
-        <select>
+        <select onChange={onContinentsSelectChange} >
 
-          {Continents.map(item => {
+          {Continents.map(item => (
             <option key={item.key} value={item.key}>{item.value} </option>
-          })}
+          ))}
 
         </select>
         <br />
         <br />
 
-        <button
-          onClick
-        >
+        <Button>
           Submit
-        </button>
+        </Button>
 
-      </form>
+      </Form>
     </div>
   )
 }
