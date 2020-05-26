@@ -2,7 +2,11 @@ import React from 'react'
 
 function FileUpload() {
   return (
-    <div>
+    <div style={{ display:'flex', justifyContent:'space-between' }} >
+      FileUpload
+
+
+
       
     </div>
   )
