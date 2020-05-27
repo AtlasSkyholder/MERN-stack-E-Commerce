@@ -5,6 +5,8 @@ import Axios from 'axios';
 
 function FileUpload() {
 
+  const[Images, setImages] = useState([]);
+
   const onDrop = (files) => {
 
     let formData = new FormData();
