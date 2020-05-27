@@ -13,7 +13,15 @@ function FileUpload() {
     }
     formData.append("file", files[0])
 
-    Axios.post('/api/product/uploadImage')
+    //save the Image we chose inside the Node Server
+    Axios.post('/api/product/uploadImage', formData, config).then(response => {
+      if(response.data.success) {
+
+      } else {
+        alert('Failed to save Image in Server');
+      }
+    })
+
 
   }
 
