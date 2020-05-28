@@ -52,9 +52,11 @@ function FileUpload(props) {
 
       <div style={{ display:'flex', width:'350px', height:'240px', overflowX:'scroll' }}>
 
-        <div onClick>
-          <img />
-        </div>
+        {Images.map((image, index) => (
+          <div onClick>
+            <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:5000/${image}` alt={`productImg-${index}`} } />
+          </div>
+        ))}
 
       </div>
 
