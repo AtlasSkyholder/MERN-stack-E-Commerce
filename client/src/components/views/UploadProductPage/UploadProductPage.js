@@ -22,6 +22,8 @@ function UploadProductPage() {
   const [PriceValue, setPriceValue] = useState(0);
   const [ContinentValue, setContinentValue] = useState(1);
 
+  const [Images, setImages] = useState(initialState);
+
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
   }

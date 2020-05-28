@@ -2,6 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
 import Axios from 'axios';
+import { response } from 'express';
 
 function FileUpload() {
 
@@ -18,6 +19,8 @@ function FileUpload() {
     //save the Image we chose inside the Node Server
     Axios.post('/api/product/uploadImage', formData, config).then(response => {
       if(response.data.success) {
+
+        setImages([...Images, response.data.image]);
 
       } else {
         alert('Failed to save Image in Server');
