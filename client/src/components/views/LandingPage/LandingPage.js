@@ -8,6 +8,8 @@ const { Meta } = Card;
 function LandingPage() {
 
   const [Products, setProducts] = useState([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
 
   useEffect(() => {
     Axios.post('/api/product/getProducts').then(response => {
@@ -19,6 +21,12 @@ function LandingPage() {
         }
     })
   }, []);
+
+  const onLoadMore = () => {
+      let skip = Skip + Limit;
+
+      Axios.post('api/product/getProduct')
+  }
 
   const renderCards = Products.map((product, index)=> {
       return (
@@ -62,7 +70,7 @@ function LandingPage() {
       }
       <br /><br />
       <div style={{ display: 'flex', justifyContent: 'center' }} >
-        <button>Load More</button>
+        <button onClick={onLoadMore} >Load More</button>
       </div>
     </div>
 
