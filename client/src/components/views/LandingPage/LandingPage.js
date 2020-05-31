@@ -26,6 +26,8 @@ function LandingPage() {
     Axios.post('/api/product/getProducts', variables).then(response => {
         if(response.data.success) {
           setProducts([...Products, ...response.data.products]);
+          setPostSize(response.data.postSize);
+
           console.log(response.data.products);
         }  else {
           alert('Failed to fetch product datas');
@@ -43,6 +45,8 @@ function LandingPage() {
     }
 
     getProducts(variables);
+
+    setSkip(skip);
   }
 
   const renderCards = Products.map((product, index)=> {
@@ -86,9 +90,13 @@ function LandingPage() {
         
       }
       <br /><br />
-      <div style={{ display: 'flex', justifyContent: 'center' }} >
-        <button onClick={onLoadMore} >Load More</button>
-      </div>
+
+      {PostSize >= Limit &&
+        <div style={{ display: 'flex', justifyContent: 'center' }} >
+          <button onClick={onLoadMore} >Load More</button>
+        </div>
+      }
+      
     </div>
 
 
