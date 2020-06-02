@@ -35,9 +35,23 @@ const price = [
   }
 ]
 
+const renderRadioBox = () => {
+  price.map((value) => (
+    <Radio key={value._id} value={`${value._id}`} >{value.name}</Radio>
+  ))
+}
+
 function RadioBox() {
   return (
     <div>
+
+      <Collapse defaultActiveKey={['0']}>
+        <Panel header="price" key="1">
+          <Radio.Group onChange value>
+            {renderRadioBox}
+          </Radio.Group>
+        </Panel>
+      </Collapse>
       
     </div>
   )

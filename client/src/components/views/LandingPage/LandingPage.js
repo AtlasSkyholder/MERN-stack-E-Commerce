@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
+import RadioBox from './Sections/RadioBox';
 
 const { Meta } = Card;
 
@@ -114,9 +115,18 @@ function LandingPage() {
 
       {/* Filter */}
 
-      <CheckBox
-        handleFilters={filters => handleFilters(filters, "continents")}
-      />
+      <Row gutter={[16, 16]}>
+          <Col lg={12} xs={24}>
+            <CheckBox
+              handleFilters={filters => handleFilters(filters, "continents")}
+            />
+          </Col>
+          <Col lg={12} xs={24}>
+            <RadioBox 
+              handleFilters={filters => handleFilters(filters, "continents")}
+            />
+          </Col>
+      </Row>
 
       {/* Search */}
 
