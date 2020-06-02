@@ -64,6 +64,12 @@ router.post("/getProducts", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
 
+  let findArgs = {};
+
+  for (let key in req.body.filters) {
+    
+  }
+
   Product.find()
   .populate("writer")
   .sort([[sortBy, order]])
