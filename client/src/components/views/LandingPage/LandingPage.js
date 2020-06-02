@@ -29,14 +29,19 @@ function LandingPage() {
 
   const getProducts = (variables) => {
     Axios.post('/api/product/getProducts', variables).then(response => {
-        if(response.data.success) {
+      if(response.data.success) {
+        if(variables.loadMore) {
           setProducts([...Products, ...response.data.products]);
-          setPostSize(response.data.postSize);
-
-          console.log(response.data.products);
-        }  else {
-          alert('Failed to fetch product datas');
+        } else {
+            setProducts(response.data.products);
         }
+        
+        setProducts([...Products, ...response.data.products]);
+        setPostSize(response.data.postSize);
+
+      }  else {
+        alert('Failed to fetch product datas');
+      }
     })
   }
 
@@ -44,9 +49,9 @@ function LandingPage() {
     let skip = Skip + Limit;
 
     const variables = {
-        skip: skip,
-        limit: Limit
-
+      skip: skip,
+      limit: Limit,
+      loadMore: true
     }
 
     getProducts(variables);

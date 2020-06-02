@@ -66,11 +66,24 @@ router.post("/getProducts", (req, res) => {
 
   let findArgs = {};
 
+  console.log(req.body.filters);
+
   for (let key in req.body.filters) {
-    
+
+    console.log(key);
+
+    if (req.body.filters[key].length > 0) {
+      if (key === "price") {
+
+      } else {
+        findArgs[key] = req.body.filters[key];
+        console.log(findArgs);
+
+      }
+    }
   }
 
-  Product.find()
+  Product.find(findArgs)
   .populate("writer")
   .sort([[sortBy, order]])
   .skip(skip)
