@@ -4,6 +4,7 @@ import { Icon, Col, Card, Row } from 'antd';
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
+import { continents, price } from './Sections/Datas';
 
 const { Meta } = Card;
 
@@ -89,6 +90,11 @@ function LandingPage() {
 
   }
 
+  const handlePrice = (value) => {
+    const data = price;
+    
+  }
+
   const handleFilters = (filters, category) => {
     
     console.log(filters);
@@ -98,7 +104,7 @@ function LandingPage() {
     newFilters[category] = filters;
 
     if (category === "price") {
-
+      let priceValues = handlePrice(filters);
     }
 
     showFilteredResults(newFilters);
@@ -119,11 +125,13 @@ function LandingPage() {
       <Row gutter={[16, 16]}>
           <Col lg={12} xs={24}>
             <CheckBox
+              list={price}
               handleFilters={filters => handleFilters(filters, "continents")}
             />
           </Col>
           <Col lg={12} xs={24}>
-            <RadioBox 
+            <RadioBox
+              list={continents}
               handleFilters={filters => handleFilters(filters, "price")}
             />
           </Col>
