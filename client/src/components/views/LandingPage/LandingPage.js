@@ -92,7 +92,15 @@ function LandingPage() {
 
   const handlePrice = (value) => {
     const data = price;
-    
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value, 10)) {
+        array = data[key].array;
+      }
+    }
+    console.log('array', array);
+    return array;
   }
 
   const handleFilters = (filters, category) => {
@@ -105,7 +113,10 @@ function LandingPage() {
 
     if (category === "price") {
       let priceValues = handlePrice(filters);
+      newFilters[category] = priceValues;
     }
+
+    console.log(newFilters)
 
     showFilteredResults(newFilters);
     setFilters(newFilters);
@@ -125,13 +136,13 @@ function LandingPage() {
       <Row gutter={[16, 16]}>
           <Col lg={12} xs={24}>
             <CheckBox
-              list={price}
+              list={continents}
               handleFilters={filters => handleFilters(filters, "continents")}
             />
           </Col>
           <Col lg={12} xs={24}>
             <RadioBox
-              list={continents}
+              list={price}
               handleFilters={filters => handleFilters(filters, "price")}
             />
           </Col>

@@ -66,14 +66,15 @@ router.post("/getProducts", (req, res) => {
 
   let findArgs = {};
 
-  console.log(req.body.filters);
-
   for (let key in req.body.filters) {
-
-    console.log(key);
 
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
+
+        findArgs[key] = {
+          $gte: req.body.filters[key][0],
+          $lte: req.body.filters[key][1]
+        }
 
       } else {
         findArgs[key] = req.body.filters[key];
