@@ -35,20 +35,27 @@ const price = [
   }
 ]
 
-const renderRadioBox = () => {
-  price.map((value) => (
-    <Radio key={value._id} value={`${value._id}`} >{value.name}</Radio>
-  ))
-}
-
 function RadioBox() {
+
+  const [Value, setValue] = useState()
+
+  const renderRadioBox = () => (
+    price.map((value) => (
+      <Radio key={value._id} value={`${value._id}`} >{value.name}</Radio>
+    ))
+  )
+  
+  const handleChange = () => {
+    setValue(event.target.value);
+  }
+
   return (
     <div>
 
       <Collapse defaultActiveKey={['0']}>
         <Panel header="price" key="1">
-          <Radio.Group onChange value>
-            {renderRadioBox}
+          <Radio.Group onChange={handleChange} value={Value}>
+            {renderRadioBox()}
           </Radio.Group>
         </Panel>
       </Collapse>
