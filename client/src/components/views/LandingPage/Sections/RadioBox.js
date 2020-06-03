@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Collapse, Radio } from 'antd';
 const { Panel } = Collapse;
 
@@ -35,9 +35,9 @@ const price = [
   }
 ]
 
-function RadioBox() {
+function RadioBox(props) {
 
-  const [Value, setValue] = useState()
+  const [Value, setValue] = useState('0')
 
   const renderRadioBox = () => (
     price.map((value) => (
@@ -47,6 +47,8 @@ function RadioBox() {
   
   const handleChange = () => {
     setValue(event.target.value);
+
+    props.handleFilters(event.target.value);
   }
 
   return (
