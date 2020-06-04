@@ -5,6 +5,7 @@ import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
 import { continents, price } from './Sections/Datas';
+import SearchFeature from "./Sections/SearchFeature";
 
 const { Meta } = Card;
 
@@ -149,6 +150,8 @@ function LandingPage() {
       </Row>
 
       {/* Search */}
+
+      <SearchFeature />
 
       {Products.length === 0 ?
         
