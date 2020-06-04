@@ -14,7 +14,9 @@ function LandingPage() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
-  const [PostSize, setPostSize] = useState(0);
+  const [PostSize, setPostSize] = useState();
+  const [SearchTerms, setSearchTerms] = useState("");
+
   const [Filters, setFilters] = useState({
       continents: [],
       price: []
@@ -124,6 +126,10 @@ function LandingPage() {
 
   }
 
+  const updateSearchTerms = (newSearchTerm) => {
+      setSearchTerms(newSearchTerm);
+  }
+
   return (
     <div>
       <div style={{ width: '75%', margin: '3rem auto' }} >
@@ -153,8 +159,10 @@ function LandingPage() {
 
       <div style={{ display:'flex', justifyContent:'flex-end', margin:'1rem auto' }}>
 
-        <SearchFeature />
-        
+        <SearchFeature
+          refreshFunction={updateSearchTerms}
+        />
+
       </div>
 
       {Products.length === 0 ?

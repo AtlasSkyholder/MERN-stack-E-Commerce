@@ -3,18 +3,20 @@ import { Input } from 'antd';
 
 const { Search } = Input;
 
-function SearchFeature() {
+function SearchFeature(props) {
 
   const [SearchTerms, setSearchTerms] = useState("");
 
   const onChangeSearch = ( event ) => {
     setSearchTerms(event.currentTarget.value);
+
+    props.refreshFunction(event.currenttarget.value);
   }
 
   return (
     <div>
       <Search
-        value
+        value={SearchTerms}
         onChange={onChangeSearch}
         placeholder="Search By Typing..."
       />
