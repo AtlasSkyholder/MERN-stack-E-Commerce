@@ -151,7 +151,11 @@ function LandingPage() {
 
       {/* Search */}
 
-      <SearchFeature />
+      <div style={{ display:'flex', justifyContent:'flex-end', margin:'1rem auto' }}>
+
+        <SearchFeature />
+        
+      </div>
 
       {Products.length === 0 ?
         

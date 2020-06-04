@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Input } from 'antd';
+
+const { Search } = Input;
 
 function SearchFeature() {
+
+  const [SearchTerms, setSearchTerms] = useState("");
+
+  const onChangeSearch = ( event ) => {
+    setSearchTerms(event.currentTarget.value);
+  }
+
   return (
     <div>
-      SearchFeature
+      <Search
+        value
+        onChange={onChangeSearch}
+        placeholder="Search By Typing..."
+      />
     </div>
   )
 }
