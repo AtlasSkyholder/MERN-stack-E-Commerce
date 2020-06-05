@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
 import Axios from 'axios'
 
-function DetailProductPage() {
+function DetailProductPage(props) {
+
+  const productId = props.match.params.productId;
 
   useEffect(() => {
     Axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
+      .then(response => {
+        
+      })
   }, [])
 
   return (

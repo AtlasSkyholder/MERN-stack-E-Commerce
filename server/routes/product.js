@@ -114,4 +114,19 @@ router.post("/getProducts", (req, res) => {
 
 });
 
+router.post("/uploadProduct", auth, (req, res) => {
+
+  //save all the data we got from the client into the DB
+  const product = new Product(req.body);
+
+  product.save((err) => {
+    if (err) {
+      return res.status(400).json({success: false, err });
+    }
+    return res.status(200).json({ success: true });
+  });
+});
+
+products_by_id?id=${productId}&type=single
+
 module.exports = router;
