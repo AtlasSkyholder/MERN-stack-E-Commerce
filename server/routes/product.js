@@ -114,19 +114,28 @@ router.post("/getProducts", (req, res) => {
 
 });
 
-router.post("/uploadProduct", auth, (req, res) => {
+router.get("/products_by_id", auth, (req, res) => {
+  let type = req.query.type;
+  let productIds = req.query.id;
 
-  //save all the data we got from the client into the DB
-  const product = new Product(req.body);
+  if (type === "array") {
 
-  product.save((err) => {
-    if (err) {
-      return res.status(400).json({success: false, err });
-    }
-    return res.status(200).json({ success: true });
-  });
+  }
+
+  //we need to find the product information that belong to product Id
+
+  Product.find({'_id' :{ $in: productIds }})
+    .populate('writer')
+    .exec((err, product) => {
+      if (err) {
+        return req.status(400).send(err);
+      }
+      return res.status(200).send(product);
+    })
+
 });
 
-products_by_id?id=${productId}&type=single
+//?id=${productId}&type=single
+//id=121212122,12122112121,121221212121 type=array
 
 module.exports = router;
