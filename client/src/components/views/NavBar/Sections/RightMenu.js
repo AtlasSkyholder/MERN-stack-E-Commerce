@@ -38,9 +38,11 @@ function RightMenu(props) {
         </Menu.Item>
 
         <Menu.Item key="cart">
-          <a href="/user/cart" style={{ marginRight: -22, color: '#667777'}}>
-            <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 4}} />
-          </a>
+          < Badge count={0} >
+            <a href="/user/cart" style={{ marginRight: -22, color: '#667777' }}>
+              <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 4 }} />
+            </a>
+          </Badge>
         </Menu.Item>
 
         <Menu.Item key="logout">
