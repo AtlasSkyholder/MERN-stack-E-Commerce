@@ -49,7 +49,7 @@ export function logoutUser(){
 }
 
 export function addToCart(_id) {
-  const request = axios.post(`${USER_SERVER}/addToCart?productId=${_id}`)
+  const request = axios.get(`${USER_SERVER}/addToCart?productId=${_id}`)
   .then(response => response.data);
 
   return {
@@ -57,4 +57,17 @@ export function addToCart(_id) {
     payload: request
   }
 }
+
+export function getCartItems(cartItems, userCart) {
+    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    .then(response => response.data);
+
+    //Make CartDetail inside Redux Store
+    // We need to add quantity data to Product Information that come from Product Collection.
+  
+    return {
+      type: ADD_TO_CART_USER,
+      payload: request
+    }
+  }
 
