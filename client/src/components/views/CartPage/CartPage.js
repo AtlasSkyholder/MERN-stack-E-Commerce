@@ -9,6 +9,7 @@ function CartPage(props) {
   useEffect(() => {
 
     const dispatch = useDispatch();
+    const [Total, setTotal] = useState(0);
 
     let cartItems = [];
     if(props.user.userData && props.user.userData.cart) {
@@ -22,6 +23,23 @@ function CartPage(props) {
     
   }, [props.user.userData]);
 
+  useEffect(() => {
+    
+    if(props.user.cartDetail && props.user.cartDetail.length > 0 ) {
+      calculateTotal(props.user.cartDetail);
+    }
+
+  }, [props.user.cartDetail]);
+
+  const calculateTotal = () => {
+    let total = 0;
+
+    cartDetail.map(item => {
+      total += parseInt(item.price, 10) * item.quantity;
+      setTotal(total);
+    })
+  }
+
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <h1>My Cart</h1>
@@ -32,7 +50,7 @@ function CartPage(props) {
         />
 
         <div style={{ marginTop: '3rem' }}>
-          <h2>Total amount: $ </h2>
+          <h2>Total amount: ${Total} </h2>
         </div>
 
         <Result
