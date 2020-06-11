@@ -134,6 +134,13 @@ router.get('/removeFromCart', auth, (req, res) => {
                 return item.id;
             })
             Product.find({ '_id': { $in: array } })
+            .populate('writer')
+            .exec((err, cartDetail) => {
+                return res. status(200).json({
+                    cartDetail,
+                    cart
+                })
+            })
         }
     )
 })
