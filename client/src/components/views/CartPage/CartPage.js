@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getCartItems } from '../../../_actions/user_actions';
+import { 
+  getCartItems,
+  removeCartItem
+  } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result, Empty } from 'antd';
 
@@ -36,8 +39,12 @@ function CartPage(props) {
 
     cartDetail.map(item => {
       total += parseInt(item.price, 10) * item.quantity;
-      setTotal(total);
-    })
+    });
+    setTotal(total);
+  }
+
+  const removeFromCart = (productId) => {
+    dispatch(removeCartItem(productId)).then()
   }
 
   return (
@@ -47,6 +54,7 @@ function CartPage(props) {
 
         <UserCardBlock
           products={props.user.cartDetail}
+          removeItem={removeFromCart}
         />
 
         <div style={{ marginTop: '3rem' }}>

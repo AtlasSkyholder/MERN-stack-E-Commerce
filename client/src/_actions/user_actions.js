@@ -80,5 +80,27 @@ export function getCartItems(cartItems, userCart) {
       type: GET_CART_ITEMS_USER,
       payload: request
     }
-  }
+}
 
+export function removeCartItem(id) {
+    const request = axios.get(`/api/users/removeFromCart?_id=${id}`)
+    .then(response => {
+
+    //Make CartDetail inside Redux Store
+    // We need to add quantity data to Product Information that come from Product Collection.
+    
+        userCart.forEach(cartItem => {
+            response.data.forEach((productDetail, i) => {
+                if(cartItem.id === productDetail._id) {
+                response.data[i].quantity = cartItem.quantity;
+                }
+            });
+        })
+        return response.data;
+    });
+
+    return {
+      type: GET_CART_ITEMS_USER,
+      payload: request
+    }
+}
