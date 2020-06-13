@@ -96,6 +96,9 @@ function CartPage(props) {
 
 
       </div>
+
+      {/* Paypal Button */}
+      
     </div>
   )
 }
