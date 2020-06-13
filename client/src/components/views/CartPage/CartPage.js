@@ -7,6 +7,7 @@ import {
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result, Empty } from 'antd';
 import Axios from 'axios';
+import Paypal from '../../utils/Paypal';
 
 function CartPage(props) {
 
@@ -64,6 +65,31 @@ function CartPage(props) {
     })
   }
 
+  const transactionSuccess = (data) => {
+
+    let variables = {
+      cartDetail: props.user.cartDetail, paymentData: data
+    }
+
+    Axios.post('/api/users/successBuy', variables)
+      .then(response => {
+        if (response.data.success) {
+          
+        } else {
+          alert('Failed to buy it');
+        }
+      })
+
+  }
+
+  const transactionError = () => {
+    console.log('Paypal error');
+  }
+
+  const transactionCanceled = () => {
+    console.log('Transaction canceled');
+  }
+
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <h1>My Cart</h1>
@@ -98,7 +124,13 @@ function CartPage(props) {
       </div>
 
       {/* Paypal Button */}
-      
+      <Paypal
+        toPay={Total}
+        onSuccess={transactionSuccess}
+        transactionError={transactionError}
+        transactionCanceled={transactionCanceled}
+      />
+
     </div>
   )
 }
