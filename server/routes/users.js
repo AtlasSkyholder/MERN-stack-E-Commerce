@@ -166,4 +166,28 @@ router.get('/userCartInfo', auth, (req, res) => {
 
 })
 
+router.get('/successBuy', auth, (req, res) => {
+  
+  let history = [];
+  let transactionData = {};
+
+  //1.Put brief Payment Information inside User Collection
+  req.body.cartDetail.forEach((item) => {
+      history.pushState({
+          dateOfPurchase: Date.now(),
+          name: item.title,
+          id: item._id,
+          price: item.price,
+          quantity: item.quantity,
+          paymentId: req.body.paymentData.paymentId
+      })
+  })
+
+  //2.Put Payment Information that come from Paypal into Payment Collection
+
+
+  //3. Increase the amount of number for the sold information
+
+})
+
 module.exports = router;
