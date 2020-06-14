@@ -5,6 +5,8 @@ const { Product } = require('../models/Product');
 const { auth } = require("../middleware/auth");
 const { Payment } = require('../models/Payment');
 
+const async = require('async');
+
 //=================================
 //             User
 //=================================
@@ -212,7 +214,24 @@ router.get('/successBuy', auth, (req, res) => {
                 }
 
                 //3. Increase the amount of number for the sold information
-                
+
+                //first We need to know how many product were sold in this transaction for each of the products
+
+                let products = [];
+                doc.product.forEach(item => {
+                    products.push({ id: item.id, quantity: item.quantity })
+                })
+
+                async.eachSeries(products, (item, callback) => {
+                  Product.update(
+                    {_id: item.id},
+                    {
+                      $inc: {
+                        "sold" :item.quantity
+                      }
+                    }
+                  )
+                })
             })
         }
     )
