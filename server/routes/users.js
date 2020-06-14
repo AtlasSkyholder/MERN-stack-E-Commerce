@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require("../models/User");
 const { Product } = require('../models/Product');
 const { auth } = require("../middleware/auth");
+const { Payment } = require('../models/Payment');
 
 //=================================
 //             User
@@ -184,9 +185,38 @@ router.get('/successBuy', auth, (req, res) => {
   })
 
   //2.Put Payment Information that come from Paypal into Payment Collection
+    transactionData.user = {
+        id: req.user._id,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        email: req.user.email
+    }
 
+    transactionData.data = req.body.paymentData;
+    transactionData.product = history;
 
-  //3. Increase the amount of number for the sold information
+    User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $push: { history: history }, $set: { cart: [] } },
+        { new: true },
+        (err, user) => {
+            if (err) {
+                return res.json({ success: false, err});
+            }
+
+            const payment = new Payment(transactionData);
+
+            payment.save((err, doc) => {
+                if (err) {
+                    return res.json({ success: false, err });
+                }
+
+                //3. Increase the amount of number for the sold information
+                
+            })
+        }
+    )
+  
 
 })
 
