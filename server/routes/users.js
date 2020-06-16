@@ -258,7 +258,7 @@ router.get('/getHistory', auth, (req, res) => {
             if (err) {
                 return res.status(400).send(err);
             }
-            return res.status(400).json({ success: true, history});
+            return res.status(200).json({ success: true, history});
         }
     )
 })

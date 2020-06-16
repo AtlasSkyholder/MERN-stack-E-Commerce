@@ -25,9 +25,23 @@ function HistoryPage() {
       <table>
         <thead>
           <tr>
-            
+            <th>Payment Id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date of Purchase</th>
           </tr>
         </thead>
+
+        <tbody>
+          {History.map(item => (
+            <tr key={item._id}>
+              <td>{item.paymentId}</td>
+              <td>{item.price}</td>
+              <td>{item.quantity}</td>
+              <td>{item.dateOfPurchase}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   )
