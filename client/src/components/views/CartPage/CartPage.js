@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { 
   getCartItems,
-  removeCartItem
+  removeCartItem,
+  onSuccessBuy
   } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result, Empty } from 'antd';
@@ -74,7 +75,9 @@ function CartPage(props) {
     Axios.post('/api/users/successBuy', variables)
       .then(response => {
         if (response.data.success) {
-          
+          setShowSuccess(true);
+          setShowTotal(false);
+          dispatchEvent(onSuccessBuy({ cart: response.data.cart, cartDetail: response.data.cart }))
         } else {
           alert('Failed to buy it');
         }
@@ -124,12 +127,16 @@ function CartPage(props) {
       </div>
 
       {/* Paypal Button */}
-      <Paypal
-        toPay={Total}
-        onSuccess={transactionSuccess}
-        transactionError={transactionError}
-        transactionCanceled={transactionCanceled}
-      />
+
+      {ShowTotal && 
+        <Paypal
+          toPay={Total}
+          onSuccess={transactionSuccess}
+          transactionError={transactionError}
+          transactionCanceled={transactionCanceled}
+        />
+      }
+      
 
     </div>
   )

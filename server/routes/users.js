@@ -169,7 +169,7 @@ router.get('/userCartInfo', auth, (req, res) => {
 
 })
 
-router.get('/successBuy', auth, (req, res) => {
+router.post('/successBuy', auth, (req, res) => {
   
   let history = [];
   let transactionData = {};
@@ -229,8 +229,19 @@ router.get('/successBuy', auth, (req, res) => {
                       $inc: {
                         "sold" :item.quantity
                       }
-                    }
+                    },
+                    { new: false },
+                    callback
                   )
+                }, (err) => {
+                    if (err) {
+                        return res.json({ success: false, err})
+                    }
+                    res.status(200).json({
+                        success: true,
+                        cart: user.cart,
+                        cartDetail: []
+                    })
                 })
             })
         }
